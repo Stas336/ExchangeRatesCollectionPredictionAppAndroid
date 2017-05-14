@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:text="Date"
+        android:text="@string/listHeaderDate"
         android:textAlignment="center"/>
 
     <View
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_weight="0.8"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="@string/listHeaderName" />
 
         <View
             android:layout_width="1px"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="USD BUY" />
+            android:text="@string/listHeaderUSDBUY" />
 
         <View
             android:layout_width="1px"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="USD SELL" />
+            android:text="@string/listHeaderUSDSELL" />
 
         <View
             android:layout_width="1px"
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="EUR BUY" />
+            android:text="@string/listHeaderEURBUY" />
 
         <View
             android:layout_width="1px"
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="EUR SELL" />
+            android:text="@string/listHeaderEURSELL" />
 
         <View
             android:layout_width="1px"
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="RUB BUY" />
+            android:text="@string/listHeaderRUBBUY" />
 
         <View
             android:layout_width="1px"
@@ -101,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="RUB SELL" />
+            android:text="@string/listHeaderRUBSELL" />
     </LinearLayout>
 
     <View
@@ -116,7 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/line1"
         android:id="@+id/linearlayout1"
-        android:layout_weight="0.8"
         android:orientation="horizontal">
 
         <TextView
@@ -124,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_weight="0.8"
             android:layout_height="wrap_content"
-            android:text="Predict" />
+            android:text="@string/listHeaderPredict" />
 
         <View
             android:layout_width="1px"
@@ -136,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="USD BUY" />
+            android:text="@string/listHeaderUSDBUY" />
 
         <View
             android:layout_width="1px"
@@ -148,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="USD SELL" />
+            android:text="@string/listHeaderUSDSELL" />
 
         <View
             android:layout_width="1px"
@@ -160,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="EUR BUY" />
+            android:text="@string/listHeaderEURBUY" />
 
         <View
             android:layout_width="1px"
@@ -172,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="EUR SELL" />
+            android:text="@string/listHeaderEURSELL" />
 
         <View
             android:layout_width="1px"
@@ -184,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="RUB BUY" />
+            android:text="@string/listHeaderRUBBUY" />
 
         <View
             android:layout_width="1px"
@@ -196,7 +195,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="RUB SELL" />
+            android:text="@string/listHeaderRUBSELL" />
     </LinearLayout>
 
 </RelativeLayout>

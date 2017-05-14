@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_weight="0.8"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="@string/listLayoutName" />
 
         <View
             android:layout_width="1px"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Value" />
+            android:text="@string/listLayoutValue" />
 
         <View
             android:layout_width="1px"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Value" />
+            android:text="@string/listLayoutValue" />
 
         <View
             android:layout_width="1px"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Value" />
+            android:text="@string/listLayoutValue" />
 
         <View
             android:layout_width="1px"
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Value" />
+            android:text="@string/listLayoutValue" />
 
         <View
             android:layout_width="1px"
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Value" />
+            android:text="@string/listLayoutValue" />
 
         <View
             android:layout_width="1px"
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Value" />
+            android:text="@string/listLayoutValue" />
     </LinearLayout>
 
 </LinearLayout>

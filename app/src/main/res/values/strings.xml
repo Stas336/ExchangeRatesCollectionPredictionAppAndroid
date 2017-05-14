@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Prediction Finance App</string>
+    <string name="subdivisionAddress">Address:</string>
+    <string name="listHeaderDate">Date</string>
+    <string name="listHeaderName">Name</string>
+    <string name="listHeaderUSDBUY">USD BUY</string>
+    <string name="listHeaderUSDSELL">USD SELL</string>
+    <string name="listHeaderEURBUY">EUR BUY</string>
+    <string name="listHeaderEURSELL">EUR SELL</string>
+    <string name="listHeaderRUBBUY">RUB BUY</string>
+    <string name="listHeaderRUBSELL">RUB SELL</string>
+    <string name="listHeaderPredict">Predict</string>
+    <string name="listLayoutName">Name</string>
+    <string name="listLayoutValue">Value</string>
+    <string name="routeButton">Press this to make a route</string>
 </resources>

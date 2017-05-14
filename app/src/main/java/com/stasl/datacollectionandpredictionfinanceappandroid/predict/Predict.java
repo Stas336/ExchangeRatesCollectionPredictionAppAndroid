@@ -1,5 +1,7 @@
 package com.stasl.datacollectionandpredictionfinanceappandroid.predict;
 
+import com.stasl.datacollectionandpredictionfinanceappandroid.activity.BankListActivity;
+
 import org.joda.time.DateTime;
 import weka.classifiers.evaluation.NumericPrediction;
 import weka.classifiers.functions.GaussianProcesses;
@@ -19,8 +21,6 @@ import java.util.Map;
 
 public class Predict
 {
-    private static final String dateFormat = "yyyy-MM-dd";
-
     private static Instance createInstance(String date, double price) throws Exception
     {
         if (date == null)
@@ -33,7 +33,7 @@ public class Predict
         }
         List<Attribute> attributes = getAttributes();
         Instance instance = new DenseInstance(attributes.size());
-        Attribute att = new Attribute("date", dateFormat);
+        Attribute att = new Attribute("date", BankListActivity.getDateFormat());
         instance.setValue(attributes.get(0), att.parseDate(date));
         instance.setValue(attributes.get(1), price);
         return instance;
@@ -59,7 +59,7 @@ public class Predict
     }
     private static ArrayList<Attribute> getAttributes()
     {
-        Attribute time = new Attribute("date", dateFormat);
+        Attribute time = new Attribute("date", BankListActivity.getDateFormat());
         Attribute price = new Attribute("price");
         ArrayList<Attribute> attributes = new ArrayList<>();
         attributes.add(time);
@@ -125,9 +125,9 @@ public class Predict
         {
             for (NumericPrediction prediction:list)
             {
-                predicted = new BigDecimal(prediction.predicted()).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
-                result.put(currentDt.toString(dateFormat),predicted);
-                System.out.println(currentDt.toString(dateFormat) + " " + predicted);
+                predicted = new BigDecimal(prediction.predicted()).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+                result.put(currentDt.toString(BankListActivity.getDateFormat()),predicted);
+                System.out.println(currentDt.toString(BankListActivity.getDateFormat()) + " " + predicted);
                 currentDt = advanceTime(forecaster.getTSLagMaker(), currentDt);
             }
         }

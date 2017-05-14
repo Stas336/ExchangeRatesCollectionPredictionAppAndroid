@@ -3,6 +3,8 @@
     package="com.stasl.datacollectionandpredictionfinanceappandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -11,14 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.BankListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SubdivisionActivity"/>
+        <activity android:name=".activity.SubdivisionListActivity"/>
+        <activity android:name=".activity.SubdivisionInfoActivity"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAddF_LiJk9o8z9uUOrc9ggolhC9HiV4mg"/>
     </application>
 
 </manifest>

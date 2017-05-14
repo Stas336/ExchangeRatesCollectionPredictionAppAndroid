@@ -2,6 +2,7 @@ package com.stasl.datacollectionandpredictionfinanceappandroid.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.stasl.datacollectionandpredictionfinanceappandroid.R;
-import com.stasl.datacollectionandpredictionfinanceappandroid.activity.SubdivisionActivity;
+import com.stasl.datacollectionandpredictionfinanceappandroid.activity.SubdivisionListActivity;
 import com.stasl.datacollectionandpredictionfinanceappandroid.bank.Bank;
 
 import java.util.List;
@@ -62,11 +63,59 @@ public class BankListAdapter extends BaseAdapter implements View.OnClickListener
         bankName.setText(bank.getName());
         bankName.setTag(position);
         bankUSDBUY.setText(String.valueOf(bank.getUSDBUY()));
+        if (bank.isUSDBUYBest())
+        {
+            bankUSDBUY.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else
+        {
+            bankUSDBUY.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        }
         bankUSDSELL.setText(String.valueOf(bank.getUSDSELL()));
+        if (bank.isUSDSELLBest())
+        {
+            bankUSDSELL.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else
+        {
+            bankUSDSELL.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        }
         bankEURBUY.setText(String.valueOf(bank.getEURBUY()));
+        if (bank.isEURBUYBest())
+        {
+            bankEURBUY.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else
+        {
+            bankEURBUY.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        }
         bankEURSELL.setText(String.valueOf(bank.getEURSELL()));
+        if (bank.isEURSELLBest())
+        {
+            bankEURSELL.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else
+        {
+            bankEURSELL.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        }
         bankRUBBUY.setText(String.valueOf(bank.getRUBBUY()));
+        if (bank.isRUBBUYBest())
+        {
+            bankRUBBUY.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else
+        {
+            bankRUBBUY.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        }
         bankRUBSELL.setText(String.valueOf(bank.getRUBSELL()));
+        if (bank.isRUBSELLBest())
+        {
+            bankRUBSELL.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else
+        {
+            bankRUBSELL.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        }
         bankName.setOnClickListener(this);
         return view;
     }
@@ -77,7 +126,7 @@ public class BankListAdapter extends BaseAdapter implements View.OnClickListener
         {
             case R.id.textName:
                 Log.d("Bank clicked", ((TextView)v.findViewById(R.id.textName)).getText().toString());
-                Intent intent = new Intent(context, SubdivisionActivity.class);
+                Intent intent = new Intent(context, SubdivisionListActivity.class);
                 Log.d("id", String.valueOf((v.findViewById(R.id.textName)).getTag()));
                 intent.putExtra("bank", banks.get((Integer) ((v.findViewById(R.id.textName)).getTag())));
                 context.startActivity(intent);

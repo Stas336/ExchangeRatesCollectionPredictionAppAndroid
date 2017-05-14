@@ -98,4 +98,52 @@ public class Subdivision implements Serializable
     {
         this.RUBSELL = RUBSELL;
     }
+
+    public boolean isUSDBUYBest() {
+        return isUSDBUYBest;
+    }
+
+    public void setUSDBUYBest(boolean USDBUYBest) {
+        isUSDBUYBest = USDBUYBest;
+    }
+
+    public boolean isUSDSELLBest() {
+        return isUSDSELLBest;
+    }
+
+    public void setUSDSELLBest(boolean USDSELLBest) {
+        isUSDSELLBest = USDSELLBest;
+    }
+
+    public boolean isEURBUYBest() {
+        return isEURBUYBest;
+    }
+
+    public void setEURBUYBest(boolean EURBUYBest) {
+        isEURBUYBest = EURBUYBest;
+    }
+
+    public boolean isEURSELLBest() {
+        return isEURSELLBest;
+    }
+
+    public void setEURSELLBest(boolean EURSELLBest) {
+        isEURSELLBest = EURSELLBest;
+    }
+
+    public boolean isRUBBUYBest() {
+        return isRUBBUYBest;
+    }
+
+    public void setRUBBUYBest(boolean RUBBUYBest) {
+        isRUBBUYBest = RUBBUYBest;
+    }
+
+    public boolean isRUBSELLBest() {
+        return isRUBSELLBest;
+    }
+
+    public void setRUBSELLBest(boolean RUBSELLBest) {
+        isRUBSELLBest = RUBSELLBest;
+    }
 }

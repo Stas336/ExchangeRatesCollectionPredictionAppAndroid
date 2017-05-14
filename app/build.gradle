@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.stasl.datacollectionandpredictionfinanceappandroid"
         minSdkVersion 15
@@ -29,8 +29,9 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'org.jsoup:jsoup:1.10.2'
-    compile group: 'nz.ac.waikato.cms.weka', name: 'weka-dev', version: '3.9.1'
-    compile group: 'nz.ac.waikato.cms.weka', name: 'timeseriesForecasting', version: '1.1.25'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-maps:10.2.4'
+    compile files('libs/weka.jar')
+    compile 'com.android.support:design:25.3.1'
 }

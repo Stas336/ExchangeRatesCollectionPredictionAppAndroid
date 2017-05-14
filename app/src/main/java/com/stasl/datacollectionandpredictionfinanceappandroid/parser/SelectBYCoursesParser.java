@@ -3,6 +3,7 @@ package com.stasl.datacollectionandpredictionfinanceappandroid.parser;
 
 import android.os.AsyncTask;
 
+import com.stasl.datacollectionandpredictionfinanceappandroid.activity.BankListActivity;
 import com.stasl.datacollectionandpredictionfinanceappandroid.bank.Bank;
 import com.stasl.datacollectionandpredictionfinanceappandroid.bank.Subdivision;
 
@@ -19,17 +20,6 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
     private static final String baseURL = "http://select.by/kurs/";
     private static final String parseElement = "td";
 
-    public static void main(String[] args)
-    {
-        try
-        {
-            getBestCourses(getBanks());
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
     public static List<Bank> getBanks() throws IOException
     {
         List<Bank> banks = new ArrayList<>();
@@ -71,7 +61,12 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
                 {
                     i += 9;
                 }
-                if (bank.getName().equals("Цептер Банк"))
+                /*if (bank.getName().equals("Цептер Банк"))
+                {
+                    i = elements.size() - 1;
+                    break;
+                }*/
+                if (bank.getName().equals("ТК Банк"))
                 {
                     i = elements.size() - 1;
                     break;
@@ -80,185 +75,121 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
             }
             banks.add(bank);
         }
+        banks = showBestCourses(banks);
         return banks;
     }
-    public static void getBestCourses(List<Bank> banks)
+    private static List<Bank> showBestCourses(List<Bank> banks)
     {
         float bestUSDBUY = 0, bestUSDSELL = 0, bestEURBUY = 0, bestEURSELL = 0, bestRUBBUY = 0, bestRUBSELL = 0;
-        List<Bank> bestBanksUSDBUY = null, bestBanksUSDSELL = null, bestBanksEURBUY = null, bestBanksEURSELL = null, bestBanksRUBBUY = null, bestBanksRUBSELL = null;
         boolean isFirst = true;
         for (Bank bank:banks)
         {
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
+
                 if (isFirst)
                 {
-                    bestUSDBUY = subdivision.getUSDBUY();
-                    bestUSDSELL = subdivision.getUSDSELL();
-                    bestEURBUY = subdivision.getEURBUY();
-                    bestEURSELL = subdivision.getEURSELL();
-                    bestRUBBUY = subdivision.getRUBBUY();
-                    bestRUBSELL = subdivision.getRUBSELL();
+                    bestUSDBUY = bank.getUSDBUY();
+                    bestUSDSELL = bank.getUSDSELL();
+                    bestEURBUY = bank.getEURBUY();
+                    bestEURSELL = bank.getEURSELL();
+                    bestRUBBUY = bank.getRUBBUY();
+                    bestRUBSELL = bank.getRUBSELL();
                     isFirst = false;
                 }
-                if (bestUSDBUY > subdivision.getUSDBUY())
+                if (bestUSDBUY < bank.getUSDBUY())
                 {
-                    bestUSDBUY = subdivision.getUSDBUY();
+                    bestUSDBUY = bank.getUSDBUY();
                 }
-                if (bestUSDSELL < subdivision.getUSDSELL())
+                if (bestUSDSELL > bank.getUSDSELL())
                 {
-                    bestUSDSELL = subdivision.getUSDSELL();
+                    bestUSDSELL = bank.getUSDSELL();
                 }
-                if (bestEURBUY > subdivision.getEURBUY())
+                if (bestEURBUY < bank.getEURBUY())
                 {
-                    bestEURBUY = subdivision.getEURBUY();
+                    bestEURBUY = bank.getEURBUY();
                 }
-                if (bestEURSELL < subdivision.getEURSELL())
+                if (bestEURSELL > bank.getEURSELL())
                 {
-                    bestEURSELL = subdivision.getEURSELL();
+                    bestEURSELL = bank.getEURSELL();
                 }
-                if (bestRUBBUY > subdivision.getRUBBUY())
+                if (bestRUBBUY < bank.getRUBBUY())
                 {
-                    bestRUBBUY = subdivision.getRUBBUY();
+                    bestRUBBUY = bank.getRUBBUY();
                 }
-                if (bestRUBSELL < subdivision.getRUBSELL())
+                if (bestRUBSELL > bank.getRUBSELL())
                 {
-                    bestRUBSELL = subdivision.getRUBSELL();
+                    bestRUBSELL = bank.getRUBSELL();
                 }
-            }
         }
-        isFirst = true;
+        BankListActivity.setBestUSDBUY(bestUSDBUY);
+        BankListActivity.setBestUSDSELL(bestUSDSELL);
+        BankListActivity.setBestEURBUY(bestEURBUY);
+        BankListActivity.setBestEURSELL(bestEURSELL);
+        BankListActivity.setBestRUBBUY(bestRUBBUY);
+        BankListActivity.setBestRUBSELL(bestRUBSELL);
         for (Bank bank:banks)
         {
-            Bank bankTempUSDBUY = new Bank(bank.getName());
-            Bank bankTempUSDSELL = new Bank(bank.getName());
-            Bank bankTempEURBUY = new Bank(bank.getName());
-            Bank bankTempEURSELL = new Bank(bank.getName());
-            Bank bankTempRUBBUY = new Bank(bank.getName());
-            Bank bankTempRUBSELL = new Bank(bank.getName());
+            if (bank.getUSDBUY() == bestUSDBUY)
+            {
+                bank.setUSDBUYBest(true);
+            }
+            if (bank.getUSDSELL() == bestUSDSELL)
+            {
+                bank.setUSDSELLBest(true);
+            }
+            if (bank.getEURBUY() == bestEURBUY)
+            {
+                bank.setEURBUYBest(true);
+            }
+            if (bank.getEURSELL() == bestEURSELL)
+            {
+                bank.setEURSELLBest(true);
+            }
+            if (bank.getRUBBUY() == bestRUBBUY)
+            {
+                bank.setRUBBUYBest(true);
+            }
+            if (bank.getRUBSELL() == bestRUBSELL)
+            {
+                bank.setRUBSELLBest(true);
+            }
             for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
             {
-                if (isFirst)
-                {
-                    bestBanksUSDBUY = new ArrayList<>();
-                    bestBanksUSDSELL = new ArrayList<>();
-                    bestBanksEURBUY = new ArrayList<>();
-                    bestBanksEURSELL = new ArrayList<>();
-                    bestBanksRUBBUY = new ArrayList<>();
-                    bestBanksRUBSELL = new ArrayList<>();
-                    isFirst = false;
-                }
                 if (subdivision.getUSDBUY() == bestUSDBUY)
                 {
-                    bankTempUSDBUY.addSubdivision(subdivision);
+                    subdivision.setUSDBUYBest(true);
                 }
                 if (subdivision.getUSDSELL() == bestUSDSELL)
                 {
-                    bankTempUSDSELL.addSubdivision(subdivision);
+                    subdivision.setUSDSELLBest(true);
                 }
                 if (subdivision.getEURBUY() == bestEURBUY)
                 {
-                    bankTempEURBUY.addSubdivision(subdivision);
+                    subdivision.setEURBUYBest(true);
                 }
                 if (subdivision.getEURSELL() == bestEURSELL)
                 {
-                    bankTempEURSELL.addSubdivision(subdivision);
+                    subdivision.setEURSELLBest(true);
                 }
                 if (subdivision.getRUBBUY() == bestRUBBUY)
                 {
-                    bankTempRUBBUY.addSubdivision(subdivision);
+                    subdivision.setRUBBUYBest(true);
                 }
                 if (subdivision.getRUBSELL() == bestRUBSELL)
                 {
-                    bankTempRUBSELL.addSubdivision(subdivision);
+                    subdivision.setRUBSELLBest(true);
                 }
             }
-            if (bankTempUSDBUY.getSubdivisionsUnmodifiable().size() > 0)
-            {
-                bestBanksUSDBUY.add(bankTempUSDBUY);
-            }
-            if (bankTempUSDSELL.getSubdivisionsUnmodifiable().size() > 0)
-            {
-                bestBanksUSDSELL.add(bankTempUSDSELL);
-            }
-            if (bankTempEURBUY.getSubdivisionsUnmodifiable().size() > 0)
-            {
-                bestBanksEURBUY.add(bankTempEURBUY);
-            }
-            if (bankTempEURSELL.getSubdivisionsUnmodifiable().size() > 0)
-            {
-                bestBanksEURSELL.add(bankTempEURSELL);
-            }
-            if (bankTempRUBBUY.getSubdivisionsUnmodifiable().size() > 0)
-            {
-                bestBanksRUBBUY.add(bankTempRUBBUY);
-            }
-            if (bankTempRUBSELL.getSubdivisionsUnmodifiable().size() > 0)
-            {
-                bestBanksRUBSELL.add(bankTempRUBSELL);
-            }
         }
-        System.out.printf("Best USD BUY - %f\n", bestUSDBUY);
-        for (Bank bank:bestBanksUSDBUY)
-        {
-            System.out.printf("%s\n\n", bank.getName());
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
-                System.out.printf("Name: %s, Address: %s\n", subdivision.getName(), subdivision.getAddress());
-            }
-        }
-        System.out.printf("Best USD SELL - %f\n", bestUSDSELL);
-        for (Bank bank:bestBanksUSDSELL)
-        {
-            System.out.printf("%s\n\n", bank.getName());
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
-                System.out.printf("Name: %s, Address: %s\n", subdivision.getName(), subdivision.getAddress());
-            }
-        }
-        System.out.printf("Best EUR BUY - %f\n", bestEURBUY);
-        for (Bank bank:bestBanksEURBUY)
-        {
-            System.out.printf("%s\n\n", bank.getName());
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
-                System.out.printf("Name: %s, Address: %s\n", subdivision.getName(), subdivision.getAddress());
-            }
-        }
-        System.out.printf("Best EUR SELL - %f\n", bestEURSELL);
-        for (Bank bank:bestBanksEURSELL)
-        {
-            System.out.printf("%s\n\n", bank.getName());
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
-                System.out.printf("Name: %s, Address: %s\n", subdivision.getName(), subdivision.getAddress());
-            }
-        }
-        System.out.printf("Best RUB BUY - %f\n", bestRUBBUY);
-        for (Bank bank:bestBanksRUBBUY)
-        {
-            System.out.printf("%s\n\n", bank.getName());
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
-                System.out.printf("Name: %s, Address: %s\n", subdivision.getName(), subdivision.getAddress());
-            }
-        }
-        System.out.printf("Best RUB SELL - %f\n", bestRUBSELL);
-        for (Bank bank:bestBanksRUBSELL)
-        {
-            System.out.printf("%s\n\n", bank.getName());
-            for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
-            {
-                System.out.printf("Name: %s, Address: %s\n", subdivision.getName(), subdivision.getAddress());
-            }
-        }
+        return banks;
     }
 
     @Override
-    protected List<Bank> doInBackground(Void... params) {
+    protected List<Bank> doInBackground(Void... params)
+    {
         try {
             return getBanks();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         return null;
