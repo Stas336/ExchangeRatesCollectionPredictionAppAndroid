@@ -12,5 +12,6 @@
     <string name="listHeaderPredict">Predict</string>
     <string name="listLayoutName">Name</string>
     <string name="listLayoutValue">Value</string>
-    <string name="routeButton">Press this to make a route</string>
+    <string name="routeButton">Make a route</string>
+    <string name="internetWarning">Exchange rates loading failed. Check your internet connection.</string>
 </resources>

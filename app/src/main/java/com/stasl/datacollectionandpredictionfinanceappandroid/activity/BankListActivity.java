@@ -5,14 +5,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.stasl.datacollectionandpredictionfinanceappandroid.R;
 import com.stasl.datacollectionandpredictionfinanceappandroid.adapter.BankListAdapter;
 import com.stasl.datacollectionandpredictionfinanceappandroid.api.NBRBAPIExecutioner;
 import com.stasl.datacollectionandpredictionfinanceappandroid.api.NBRBAPIParameters;
+import com.stasl.datacollectionandpredictionfinanceappandroid.bank.Bank;
 import com.stasl.datacollectionandpredictionfinanceappandroid.currency.Currencies;
 import com.stasl.datacollectionandpredictionfinanceappandroid.currency.Currency;
 import com.stasl.datacollectionandpredictionfinanceappandroid.parser.SelectBYCoursesParser;
@@ -23,6 +24,7 @@ import org.joda.time.DateTime;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -34,35 +36,61 @@ public class BankListActivity extends AppCompatActivity {
     private static final String predictStartDate = "2016-07-01"; // TOO MANY FOR ANDROID PHONES
     private static final int predictMonthWindow = 1;
     private static final int predictSteps = 1;
+    private ListView list;
+    private BankListAdapter adapter;
     private static float bestUSDBUY = 0, bestUSDSELL = 0, bestEURBUY = 0, bestEURSELL = 0, bestRUBBUY = 0, bestRUBSELL = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_activity);
-        BankListAdapter adapter = null;
+        requestExchangeRates();
+    }
+    private void requestExchangeRates()
+    {
+        List<Bank> banks = null;
         SelectBYCoursesParser selectBYCoursesParser = new SelectBYCoursesParser();
         try {
-            adapter = new BankListAdapter(this, selectBYCoursesParser.execute().get());
-        } catch (InterruptedException | ExecutionException e)
-        {
-            //Snackbar.make(findViewById(android.R.id.content), "Loading failed...", Snackbar.LENGTH_SHORT).show();
+            banks = selectBYCoursesParser.execute().get();
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        ListView list = (ListView)findViewById(R.id.List);
+        if (banks != null)
+        {
+            setUpList(banks);
+        }
+        else
+        {
+            Snackbar.make(findViewById(android.R.id.content), R.string.internetWarning, Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Retry", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestExchangeRates();
+                        }
+                    }).setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed))
+                    .show();
+        }
+    }
+    private void setUpList(List<Bank> banks)
+    {
+        adapter = new BankListAdapter(this, banks);
+        list = (ListView)findViewById(R.id.List);
         SimpleDateFormat df = new SimpleDateFormat(dateFormat);
         list.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
         TextView date = (TextView) findViewById(R.id.date);
         date.setText(df.format(new Date()));
-        try {
-            predict();
-        } catch (Exception e)
+        list.setAdapter(adapter);
+        try
         {
+            predictExchangeRates();
+        }
+        catch (Exception e)
+        {
+            finish();
             e.printStackTrace();
         }
-        list.setAdapter(adapter);
     }
-    public void predict() throws Exception
+    private void predictExchangeRates() throws Exception
     {
         SimpleDateFormat date = new SimpleDateFormat(dateFormat);
         for (Currencies currency:Currencies.values())
@@ -83,7 +111,7 @@ public class BankListActivity extends AppCompatActivity {
                 ((TextView)findViewById(R.id.textUSDBUYPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen));
                 ((TextView)findViewById(R.id.textUSDSELLPredict)).setText(String.valueOf(result.values().iterator().next()));
                 ((TextView)findViewById(R.id.textUSDSELLPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen));
-                if (result.values().iterator().next() > getBestUSDBUY())
+                if (result.values().iterator().next() < getBestUSDBUY())
                 {
                     ((TextView)findViewById(R.id.textUSDBUYPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed));
                 }
@@ -98,7 +126,7 @@ public class BankListActivity extends AppCompatActivity {
                 ((TextView)findViewById(R.id.textEURBUYPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen));
                 ((TextView)findViewById(R.id.textEURSELLPredict)).setText(String.valueOf(result.values().iterator().next()));
                 ((TextView)findViewById(R.id.textEURSELLPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen));
-                if (result.values().iterator().next() > getBestEURBUY())
+                if (result.values().iterator().next() < getBestEURBUY())
                 {
                     ((TextView)findViewById(R.id.textEURBUYPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed));
                 }
@@ -113,7 +141,7 @@ public class BankListActivity extends AppCompatActivity {
                 ((TextView)findViewById(R.id.textRUBBUYPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen));
                 ((TextView)findViewById(R.id.textRUBSELLPredict)).setText(String.valueOf(result.values().iterator().next()));
                 ((TextView)findViewById(R.id.textRUBSELLPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen));
-                if (result.values().iterator().next() > getBestRUBBUY())
+                if (result.values().iterator().next() < getBestRUBBUY())
                 {
                     ((TextView)findViewById(R.id.textRUBBUYPredict)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed));
                 }
