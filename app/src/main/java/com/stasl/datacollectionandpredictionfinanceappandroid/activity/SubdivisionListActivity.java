@@ -21,7 +21,7 @@ public class SubdivisionListActivity extends AppCompatActivity
         Bank bank = getIntent().getParcelableExtra("bank");
         BankSubdivisionListAdapter adapter = new BankSubdivisionListAdapter(this, bank.getSubdivisionsUnmodifiable());
         ListView list = (ListView)findViewById(R.id.List);
-        list.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
+        list.addHeaderView(getLayoutInflater().inflate(R.layout.list_header_modified, null, false));
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat(BankListActivity.getDateFormat());
         String formattedDate = df.format(c.getTime());

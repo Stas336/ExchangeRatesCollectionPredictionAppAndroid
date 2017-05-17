@@ -2,6 +2,7 @@ package com.stasl.datacollectionandpredictionfinanceappandroid.parser;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.stasl.datacollectionandpredictionfinanceappandroid.activity.BankListActivity;
 import com.stasl.datacollectionandpredictionfinanceappandroid.bank.Bank;
@@ -28,7 +29,7 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
         for (int i = 1;i < elements.size();i++)
         {
             Bank bank = new Bank(elements.get(i++).child(0).text());
-            System.out.println("Bank name " + bank.getName());
+            Log.d("Parser", "Bank name " + bank.getName());
             bank.setUSDBUY(Float.valueOf(elements.get(i++).text().replace(",",".")));
             bank.setUSDSELL(Float.valueOf(elements.get(i++).text().replace(",",".")));
             bank.setEURBUY(Float.valueOf(elements.get(i++).text().replace(",",".")));
@@ -48,14 +49,14 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
                 subdivision.setEURSELL(Float.valueOf(elements.get(i++).text().replace(",",".")));
                 subdivision.setRUBBUY(Float.valueOf(elements.get(i++).text().replace(",",".")));
                 subdivision.setRUBSELL(Float.valueOf(elements.get(i++).text().replace(",",".")));
-                System.out.println("Bank subdivision name " + subdivision.getName());
-                System.out.println("Bank subdivision address " + subdivision.getAddress());
-                System.out.println("USD BUY " + subdivision.getUSDBUY());
-                System.out.println("USD SELL " + subdivision.getUSDSELL());
-                System.out.println("EUR BUY " + subdivision.getEURBUY());
-                System.out.println("EUR SELL " + subdivision.getEURSELL());
-                System.out.println("RUB BUY " + subdivision.getRUBBUY());
-                System.out.println("RUB SELL " + subdivision.getRUBSELL());
+                Log.d("Parser", "Bank subdivision name " + subdivision.getName());
+                Log.d("Parser", "Bank subdivision address " + subdivision.getAddress());
+                Log.d("Parser", "USD BUY " + subdivision.getUSDBUY());
+                Log.d("Parser", "USD SELL " + subdivision.getUSDSELL());
+                Log.d("Parser", "EUR BUY " + subdivision.getEURBUY());
+                Log.d("Parser", "EUR SELL " + subdivision.getEURSELL());
+                Log.d("Parser", "RUB BUY " + subdivision.getRUBBUY());
+                Log.d("Parser", "RUB SELL " + subdivision.getRUBSELL());
                 bank.addSubdivision(subdivision);
                 if (subdivision.getName().equals("ПРК №36")) // BUG ON WEBSITE
                 {

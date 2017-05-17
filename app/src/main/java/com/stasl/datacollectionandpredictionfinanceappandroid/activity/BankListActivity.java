@@ -62,7 +62,7 @@ public class BankListActivity extends AppCompatActivity {
         else
         {
             Snackbar.make(findViewById(android.R.id.content), R.string.internetWarning, Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Retry", new View.OnClickListener() {
+                    .setAction(R.string.snackbar_retry, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             requestExchangeRates();

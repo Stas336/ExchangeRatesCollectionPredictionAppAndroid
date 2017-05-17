@@ -1,5 +1,7 @@
 package com.stasl.datacollectionandpredictionfinanceappandroid.predict;
 
+import android.util.Log;
+
 import com.stasl.datacollectionandpredictionfinanceappandroid.activity.BankListActivity;
 
 import org.joda.time.DateTime;
@@ -55,7 +57,7 @@ public class Predict
         // prime with enough data to cover our maximum lag
         eval.setPrimeWindowSize(1);
         eval.evaluateForecaster(forecaster);
-        System.out.println(eval.toSummaryString());
+        Log.d("Training set evaluation", eval.toSummaryString());
     }
     private static ArrayList<Attribute> getAttributes()
     {
@@ -127,7 +129,7 @@ public class Predict
             {
                 predicted = new BigDecimal(prediction.predicted()).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
                 result.put(currentDt.toString(BankListActivity.getDateFormat()),predicted);
-                System.out.println(currentDt.toString(BankListActivity.getDateFormat()) + " " + predicted);
+                Log.d("Prediction", currentDt.toString(BankListActivity.getDateFormat()) + " " + predicted);
                 currentDt = advanceTime(forecaster.getTSLagMaker(), currentDt);
             }
         }

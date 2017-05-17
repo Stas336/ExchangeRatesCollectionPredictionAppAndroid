@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Предсказание курсов валют</string>
+    <string name="internetWarning">Загрузка курсов валют не удалась. Проверьте свое интернет соединение.</string>
+    <string name="listHeaderDate">Дата</string>
+    <string name="listHeaderName">Название</string>
+    <string name="listHeaderPredict">Прогноз</string>
+    <string name="listLayoutName">Название</string>
+    <string name="listLayoutValue">Значение</string>
+    <string name="routeButton">Проложить маршрут</string>
+    <string name="subdivisionAddress">Адрес:</string>
+    <string name="permission">Дайте разрешение, перед использованием этой возможности</string>
+    <string name="snackbar_retry">Повторить</string>
+    <string name="user_place">Вы здесь</string>
+    <string name="km">километры</string>
+    <string name="distance_info">Расстояние между этими двумя местами</string>
+</resources>

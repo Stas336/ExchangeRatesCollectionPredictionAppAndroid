@@ -3,15 +3,20 @@
     <string name="subdivisionAddress">Address:</string>
     <string name="listHeaderDate">Date</string>
     <string name="listHeaderName">Name</string>
-    <string name="listHeaderUSDBUY">USD BUY</string>
-    <string name="listHeaderUSDSELL">USD SELL</string>
-    <string name="listHeaderEURBUY">EUR BUY</string>
-    <string name="listHeaderEURSELL">EUR SELL</string>
-    <string name="listHeaderRUBBUY">RUB BUY</string>
-    <string name="listHeaderRUBSELL">RUB SELL</string>
+    <string name="listHeaderUSDBUY" translatable="false">USD BUY</string>
+    <string name="listHeaderUSDSELL" translatable="false">USD SELL</string>
+    <string name="listHeaderEURBUY" translatable="false">EUR BUY</string>
+    <string name="listHeaderEURSELL" translatable="false">EUR SELL</string>
+    <string name="listHeaderRUBBUY" translatable="false">RUB BUY</string>
+    <string name="listHeaderRUBSELL" translatable="false">RUB SELL</string>
     <string name="listHeaderPredict">Predict</string>
     <string name="listLayoutName">Name</string>
     <string name="listLayoutValue">Value</string>
     <string name="routeButton">Make a route</string>
     <string name="internetWarning">Exchange rates loading failed. Check your internet connection.</string>
+    <string name="permission">Give permission, before using this feature</string>
+    <string name="user_place">You\'re here</string>
+    <string name="distance_info">Distance between two places is</string>
+    <string name="km">kilometers</string>
+    <string name="snackbar_retry">Retry</string>
 </resources>

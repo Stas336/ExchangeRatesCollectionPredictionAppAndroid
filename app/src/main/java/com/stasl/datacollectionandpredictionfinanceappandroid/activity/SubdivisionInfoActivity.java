@@ -118,7 +118,7 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
         LatLngBounds bounds = builder.build();
         cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         map.animateCamera(cameraUpdate);
-        Snackbar.make(findViewById(android.R.id.content), "Distance between two places is " + calculateDistance(coordinates.get(0), coordinates.get(1)) + " kilometers", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.distance_info) + calculateDistance(coordinates.get(0), coordinates.get(1)) + getString(R.string.km), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -167,7 +167,7 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
         Log.d("GPS lng", String.valueOf(locationService.getLongitude()));
         markers.add(map.addMarker(new MarkerOptions()
                 .position(new LatLng(locationService.getLatitude(), locationService.getLongitude()))
-                .title("You're here")));
+                .title(getString(R.string.user_place))));
         ArrayList<LatLng> coordinates = new ArrayList<>();
         coordinates.add(subdivisionCoordinates);
         coordinates.add(new LatLng(locationService.getLatitude(), locationService.getLongitude()));
@@ -200,7 +200,7 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
                 }
                 else
                 {
-                    Snackbar.make(findViewById(android.R.id.content), "Give permission, before using this feature", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), R.string.permission, Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
