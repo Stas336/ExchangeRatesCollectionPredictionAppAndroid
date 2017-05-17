@@ -12,6 +12,6 @@
     <string name="permission">Дайте разрешение, перед использованием этой возможности</string>
     <string name="snackbar_retry">Повторить</string>
     <string name="user_place">Вы здесь</string>
-    <string name="km">километры</string>
+    <string name="km">км</string>
     <string name="distance_info">Расстояние между этими двумя местами</string>
 </resources>

@@ -17,6 +17,6 @@
     <string name="permission">Give permission, before using this feature</string>
     <string name="user_place">You\'re here</string>
     <string name="distance_info">Distance between two places is</string>
-    <string name="km">kilometers</string>
+    <string name="km">km</string>
     <string name="snackbar_retry">Retry</string>
 </resources>

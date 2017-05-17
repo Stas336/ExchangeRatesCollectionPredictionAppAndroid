@@ -118,7 +118,7 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
         LatLngBounds bounds = builder.build();
         cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         map.animateCamera(cameraUpdate);
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.distance_info) + calculateDistance(coordinates.get(0), coordinates.get(1)) + getString(R.string.km), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.distance_info) + " " + calculateDistance(coordinates.get(0), coordinates.get(1)) + " " + getString(R.string.km), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
