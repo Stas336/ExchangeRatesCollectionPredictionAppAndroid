@@ -8,10 +8,15 @@
     <string name="listLayoutName">Название</string>
     <string name="listLayoutValue">Значение</string>
     <string name="routeButton">Проложить маршрут</string>
-    <string name="subdivisionAddress">Адрес:</string>
     <string name="permission">Дайте разрешение, перед использованием этой возможности</string>
     <string name="snackbar_retry">Повторить</string>
     <string name="user_place">Вы здесь</string>
     <string name="km">км</string>
     <string name="distance_info">Расстояние между этими двумя местами</string>
+    <string name="nbrb">НБРБ</string>
+    <string name="googleMapsAnswer">Да</string>
+    <string name="googleMapsWarning">Показать это место в Google Maps?</string>
+    <string name="googleMapsError">Установите Google Maps, перед использованием этой функции</string>
+    <string name="exit">Выход</string>
+    <string name="settings">Настройки</string>
 </resources>

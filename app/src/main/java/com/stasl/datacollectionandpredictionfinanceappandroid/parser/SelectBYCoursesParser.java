@@ -81,101 +81,93 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
     }
     private static List<Bank> showBestCourses(List<Bank> banks)
     {
-        float bestUSDBUY = 0, bestUSDSELL = 0, bestEURBUY = 0, bestEURSELL = 0, bestRUBBUY = 0, bestRUBSELL = 0;
         boolean isFirst = true;
         for (Bank bank:banks)
         {
-
                 if (isFirst)
                 {
-                    bestUSDBUY = bank.getUSDBUY();
-                    bestUSDSELL = bank.getUSDSELL();
-                    bestEURBUY = bank.getEURBUY();
-                    bestEURSELL = bank.getEURSELL();
-                    bestRUBBUY = bank.getRUBBUY();
-                    bestRUBSELL = bank.getRUBSELL();
+                    BankListActivity.setBestUSDBUY(bank.getUSDBUY());
+                    BankListActivity.setBestUSDSELL(bank.getUSDSELL());
+                    BankListActivity.setBestEURBUY(bank.getEURBUY());
+                    BankListActivity.setBestEURSELL(bank.getEURSELL());
+                    BankListActivity.setBestRUBBUY(bank.getRUBBUY());
+                    BankListActivity.setBestRUBSELL(bank.getRUBSELL());
                     isFirst = false;
                 }
-                if (bestUSDBUY < bank.getUSDBUY())
+                if (BankListActivity.getBestUSDBUY() < bank.getUSDBUY())
                 {
-                    bestUSDBUY = bank.getUSDBUY();
+                    BankListActivity.setBestUSDBUY(bank.getUSDBUY());
                 }
-                if (bestUSDSELL > bank.getUSDSELL())
+                if (BankListActivity.getBestUSDSELL() > bank.getUSDSELL())
                 {
-                    bestUSDSELL = bank.getUSDSELL();
+                    BankListActivity.setBestUSDSELL(bank.getUSDSELL());
                 }
-                if (bestEURBUY < bank.getEURBUY())
+                if (BankListActivity.getBestEURBUY() < bank.getEURBUY())
                 {
-                    bestEURBUY = bank.getEURBUY();
+                    BankListActivity.setBestEURBUY(bank.getEURBUY());
                 }
-                if (bestEURSELL > bank.getEURSELL())
+                if (BankListActivity.getBestEURSELL() > bank.getEURSELL())
                 {
-                    bestEURSELL = bank.getEURSELL();
+                    BankListActivity.setBestEURSELL(bank.getEURSELL());
                 }
-                if (bestRUBBUY < bank.getRUBBUY())
+                if (BankListActivity.getBestRUBBUY() < bank.getRUBBUY())
                 {
-                    bestRUBBUY = bank.getRUBBUY();
+                    BankListActivity.setBestRUBBUY(bank.getRUBBUY());
                 }
-                if (bestRUBSELL > bank.getRUBSELL())
+                if (BankListActivity.getBestRUBSELL() > bank.getRUBSELL())
                 {
-                    bestRUBSELL = bank.getRUBSELL();
+                    BankListActivity.setBestRUBSELL(bank.getRUBSELL());
                 }
         }
-        BankListActivity.setBestUSDBUY(bestUSDBUY);
-        BankListActivity.setBestUSDSELL(bestUSDSELL);
-        BankListActivity.setBestEURBUY(bestEURBUY);
-        BankListActivity.setBestEURSELL(bestEURSELL);
-        BankListActivity.setBestRUBBUY(bestRUBBUY);
-        BankListActivity.setBestRUBSELL(bestRUBSELL);
         for (Bank bank:banks)
         {
-            if (bank.getUSDBUY() == bestUSDBUY)
+            if (bank.getUSDBUY() == BankListActivity.getBestUSDBUY())
             {
                 bank.setUSDBUYBest(true);
             }
-            if (bank.getUSDSELL() == bestUSDSELL)
+            if (bank.getUSDSELL() == BankListActivity.getBestUSDSELL())
             {
                 bank.setUSDSELLBest(true);
             }
-            if (bank.getEURBUY() == bestEURBUY)
+            if (bank.getEURBUY() == BankListActivity.getBestEURBUY())
             {
                 bank.setEURBUYBest(true);
             }
-            if (bank.getEURSELL() == bestEURSELL)
+            if (bank.getEURSELL() == BankListActivity.getBestEURSELL())
             {
                 bank.setEURSELLBest(true);
             }
-            if (bank.getRUBBUY() == bestRUBBUY)
+            if (bank.getRUBBUY() == BankListActivity.getBestRUBBUY())
             {
                 bank.setRUBBUYBest(true);
             }
-            if (bank.getRUBSELL() == bestRUBSELL)
+            if (bank.getRUBSELL() == BankListActivity.getBestRUBSELL())
             {
                 bank.setRUBSELLBest(true);
             }
             for (Subdivision subdivision:bank.getSubdivisionsUnmodifiable())
             {
-                if (subdivision.getUSDBUY() == bestUSDBUY)
+                if (subdivision.getUSDBUY() == BankListActivity.getBestUSDBUY())
                 {
                     subdivision.setUSDBUYBest(true);
                 }
-                if (subdivision.getUSDSELL() == bestUSDSELL)
+                if (subdivision.getUSDSELL() == BankListActivity.getBestUSDSELL())
                 {
                     subdivision.setUSDSELLBest(true);
                 }
-                if (subdivision.getEURBUY() == bestEURBUY)
+                if (subdivision.getEURBUY() == BankListActivity.getBestEURBUY())
                 {
                     subdivision.setEURBUYBest(true);
                 }
-                if (subdivision.getEURSELL() == bestEURSELL)
+                if (subdivision.getEURSELL() == BankListActivity.getBestEURSELL())
                 {
                     subdivision.setEURSELLBest(true);
                 }
-                if (subdivision.getRUBBUY() == bestRUBBUY)
+                if (subdivision.getRUBBUY() == BankListActivity.getBestRUBBUY())
                 {
                     subdivision.setRUBBUYBest(true);
                 }
-                if (subdivision.getRUBSELL() == bestRUBSELL)
+                if (subdivision.getRUBSELL() == BankListActivity.getBestRUBSELL())
                 {
                     subdivision.setRUBSELLBest(true);
                 }
@@ -187,7 +179,8 @@ public class SelectBYCoursesParser extends AsyncTask<Void, Void, List<Bank>>
     @Override
     protected List<Bank> doInBackground(Void... params)
     {
-        try {
+        try
+        {
             return getBanks();
         } catch (IOException e)
         {

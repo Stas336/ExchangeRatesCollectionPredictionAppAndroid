@@ -198,4 +198,98 @@
             android:text="@string/listHeaderRUBSELL" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/line2"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/linearlayout1"
+        android:background="@color/colorBlack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:id="@+id/linearlayout2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="0.8"
+            android:layout_height="wrap_content"
+            android:text="@string/nbrb" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/textUSDBUYNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/listHeaderUSDBUY" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/textUSDSELLNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/listHeaderUSDSELL" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/textEURBUYNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/listHeaderEURBUY" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/textEURSELLNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/listHeaderEURSELL" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/textRUBBUYNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/listHeaderRUBBUY" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/textRUBSELLNBRB"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/listHeaderRUBSELL" />
+    </LinearLayout>
+
 </RelativeLayout>

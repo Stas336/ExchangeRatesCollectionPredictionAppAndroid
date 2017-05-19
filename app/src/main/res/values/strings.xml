@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Prediction Finance App</string>
-    <string name="subdivisionAddress">Address:</string>
     <string name="listHeaderDate">Date</string>
     <string name="listHeaderName">Name</string>
     <string name="listHeaderUSDBUY" translatable="false">USD BUY</string>
@@ -19,4 +18,10 @@
     <string name="distance_info">Distance between two places is</string>
     <string name="km">km</string>
     <string name="snackbar_retry">Retry</string>
+    <string name="nbrb">NBRB</string>
+    <string name="googleMapsWarning">Show this place on Google Maps?</string>
+    <string name="googleMapsAnswer">Yes</string>
+    <string name="googleMapsError">Install Google Maps, before using this feature</string>
+    <string name="exit">Exit</string>
+    <string name="settings">Settings</string>
 </resources>

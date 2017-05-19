@@ -1,9 +1,12 @@
 package com.stasl.datacollectionandpredictionfinanceappandroid.activity;
 
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -55,6 +58,7 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
         address = town + getIntent().getStringExtra("address");
         textViewAddress = (TextView)findViewById(R.id.address);
         textViewAddress.setText(address);
+        textViewAddress.setOnClickListener(this);
         getSupportActionBar().setTitle(name);
         routeButton = (Button)findViewById(R.id.routeButton);
         routeButton.setOnClickListener(this);
@@ -68,15 +72,13 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
     {
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        googleMap.setIndoorEnabled(true);
         googleMap.setBuildingsEnabled(true);
         map.getUiSettings().setZoomControlsEnabled(true);
         MapsInitializer.initialize(this);
         List<Address> addresses = new ArrayList<>();
-        Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
         try
         {
-            addresses = geo.getFromLocationName(address, 1);
+            addresses = findPlace(address);
         } catch (IOException e)
         {
             finish();
@@ -90,7 +92,11 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
                 .title(name)));
         map.animateCamera(cameraUpdate);
     }
-
+    private List<Address> findPlace(String address) throws IOException
+    {
+        Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
+        return geo.getFromLocationName(address, 1);
+    }
     private void drawPrimaryLinePath(ArrayList<LatLng> coordinates)
     {
         if (map == null)
@@ -151,13 +157,62 @@ public class SubdivisionInfoActivity extends AppCompatActivity implements OnMapR
     @Override
     public void onClick(View v)
     {
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        switch (v.getId())
         {
-            ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.ACCESS_COARSE_LOCATION }, LocationService.MY_PERMISSION_ACCESS_COURSE_LOCATION);
+            case R.id.address:
+                Snackbar.make(findViewById(android.R.id.content), R.string.googleMapsWarning, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.googleMapsAnswer, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                try
+                                {
+                                    List<Address> addresses = findPlace(address);
+                                    openGoogleMaps(addresses.get(0));
+                                } catch (IOException e)
+                                {
+                                    finish();
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorGreen))
+                        .show();
+                break;
+            case R.id.routeButton:
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.ACCESS_COARSE_LOCATION }, LocationService.MY_PERMISSION_ACCESS_COURSE_LOCATION);
+                }
+                else
+                {
+                    findMyLocation();
+                }
+                break;
+        }
+    }
+    private void openGoogleMaps(Address address)
+    {
+        if (isGoogleMapsInstalled())
+        {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?q=loc:" + address.getLatitude() +","+ address.getLongitude()));
+            intent.setPackage("com.google.android.apps.maps");
+            startActivity(intent);
         }
         else
         {
-            findMyLocation();
+            Snackbar.make(findViewById(android.R.id.content), R.string.googleMapsError, Snackbar.LENGTH_SHORT).show();
+        }
+    }
+    public boolean isGoogleMapsInstalled()
+    {
+        try
+        {
+            ApplicationInfo info = getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0);
+            return true;
+        }
+        catch(PackageManager.NameNotFoundException e)
+        {
+            return false;
         }
     }
     private void findMyLocation()

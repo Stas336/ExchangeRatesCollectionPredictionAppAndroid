@@ -5,6 +5,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import com.stasl.datacollectionandpredictionfinanceappandroid.predict.Predict;
 
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +50,29 @@ public class BankListActivity extends AppCompatActivity {
         setContentView(R.layout.list_activity);
         requestExchangeRates();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.action_settings:
+                throw new UnsupportedOperationException();
+            case R.id.action_exit:
+                android.os.Process.killProcess(android.os.Process.myPid());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void requestExchangeRates()
     {
         List<Bank> banks = null;
@@ -82,12 +109,46 @@ public class BankListActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         try
         {
+            setUpNBRBRates();
             predictExchangeRates();
         }
         catch (Exception e)
         {
             finish();
             e.printStackTrace();
+        }
+    }
+    private void setUpNBRBRates() throws ExecutionException, InterruptedException, ParseException
+    {
+        SimpleDateFormat date = new SimpleDateFormat(dateFormat);
+        for (Currencies currency:Currencies.values())
+        {
+            NBRBAPIExecutioner executioner = new NBRBAPIExecutioner();
+            for (Currency currency1 : executioner.execute(new NBRBAPIParameters(currency.getCode(), date.format(new Date()), date.format(new Date()))).get())
+            {
+                String value = new BigDecimal(currency1.getCur_OfficialRate()).setScale(3, BigDecimal.ROUND_HALF_UP).toString();
+                switch (currency.getCode())
+                {
+                    case 145: //USD
+                        ((TextView) findViewById(R.id.textUSDBUYNBRB)).setText(value);
+                        ((TextView) findViewById(R.id.textUSDBUYNBRB)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                        ((TextView) findViewById(R.id.textUSDSELLNBRB)).setText(value);
+                        ((TextView) findViewById(R.id.textUSDSELLNBRB)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                        break;
+                    case 292: //EUR
+                        ((TextView) findViewById(R.id.textEURBUYNBRB)).setText(value);
+                        ((TextView) findViewById(R.id.textEURBUYNBRB)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                        ((TextView) findViewById(R.id.textEURSELLNBRB)).setText(value);
+                        ((TextView) findViewById(R.id.textEURSELLNBRB)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                        break;
+                    case 298: //RUB
+                        ((TextView) findViewById(R.id.textRUBBUYNBRB)).setText(value);
+                        ((TextView) findViewById(R.id.textRUBBUYNBRB)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                        ((TextView) findViewById(R.id.textRUBSELLNBRB)).setText(value);
+                        ((TextView) findViewById(R.id.textRUBSELLNBRB)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                        break;
+                }
+            }
         }
     }
     private void predictExchangeRates() throws Exception
@@ -156,6 +217,7 @@ public class BankListActivity extends AppCompatActivity {
     {
         return dateFormat;
     }
+
     public static float getBestUSDBUY() {
         return bestUSDBUY;
     }
